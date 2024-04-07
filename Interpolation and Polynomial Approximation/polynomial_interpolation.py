@@ -1,5 +1,78 @@
 from colors import bcolors
 from matrix_utility import *
+from jacobi_utilities import *
+
+import numpy as np
+def forward_substitution_to_diagonal(mat):
+    N = len(mat)
+    for k in range(N - 1, -1, -1):
+        scalar = mat[k][k]
+        for j in range(N + 1):
+            mat[k][j] /= scalar
+
+        for i in range(k - 1, -1, -1):
+            scalar = mat[i][k]
+            for j in range(N + 1):
+                mat[i][j] -= mat[k][j] * scalar
+
+def gaussianElimination(mat):
+    N = len(mat)
+    singular_flag = forward_substitution(mat)
+    if singular_flag != -1:
+
+        if mat[singular_flag][N]:
+            return "Singular Matrix (Inconsistent System)"
+        else:
+            return "Singular Matrix (May have infinitely many solutions)"
+
+# if matrix is non-singular:
+    forward_substitution_to_diagonal(mat)
+    print(np.array(mat))
+    # get solution to system using backward substitution
+    return backward_substitution(mat)
+
+def polynomialInterpolation(matrix,table_points, x):
+
+    b = [[point[1]] for point in table_points]
+    matrixNew = np.hstack((matrix, b))
+    print(bcolors.OKBLUE, "The matrix obtained from the points: ", bcolors.ENDC,'\n', np.array(matrix))
+    print(bcolors.OKBLUE, "\nb vector: ", bcolors.ENDC,'\n',np.array(b))
+    matrixSol = gaussianElimination(matrixNew)
+    if matrixSol is not None:
+        print(bcolors.OKBLUE, "\nResult Gauss: ", bcolors.ENDC, '\n', np.array(matrixSol))
+        result = sum([matrixSol[i] * (x ** i) for i in range(len(matrixSol))])
+        print(bcolors.OKBLUE, "\nThe polynom:", bcolors.ENDC)
+        print('P(X) = '+'+'.join([ '('+str(matrixSol[i])+') * x^' + str(i) + ' ' for i in range(len(matrixSol))]))
+        print(bcolors.OKGREEN, f"\nThe Result of P(X={x}) is:", bcolors.ENDC)
+        print(result)
+        return result
+    return None
+
+def Prerequisite(table_points):
+    matrix = [[point[0] ** i for i in range(len(table_points))] for point in table_points]  # Makes the initial matrix
+    if not np.linalg.det(matrix):
+        print("Singular Matrix")
+        return None
+    return matrix
+
+if __name__ == '__main__':
+
+    print(bcolors.OKBLUE, "----------------- Interpolation & Extrapolation Methods -----------------", bcolors.ENDC)
+    table_points = [(1, 3), (2, 4), (3, -1)]
+    x = 1.5
+    matrix = Prerequisite(table_points)
+    if matrix is not None:
+        print(bcolors.OKBLUE, "Table Points: ", bcolors.ENDC, table_points)
+        print(bcolors.OKBLUE, "Finding an approximation to the point: ", bcolors.ENDC, x,'')
+        if polynomialInterpolation(matrix, table_points, x) is None:
+            print(" Singular Matrix")
+        print(bcolors.OKBLUE, "---------------------------------------------------------------------------", bcolors.ENDC)
+
+
+
+'''
+from colors import bcolors
+from matrix_utility import *
 
 
 def GaussJordanElimination(matrix, vector):
@@ -114,10 +187,11 @@ def polynomialInterpolation(table_points, x):
 
 if __name__ == '__main__':
 
-    table_points = [(0, 0), (1, 0.8415), (2, 0.9093), (3, 0.1411), (4, -0.7568), (5, -0.9589), (6, -0.2794)]
-    x = 1.28
+    table_points = [(1, 3), (2, 4), (3, -1)]
+    x = 1.5
     print(bcolors.OKBLUE, "----------------- Interpolation & Extrapolation Methods -----------------\n", bcolors.ENDC)
     print(bcolors.OKBLUE, "Table Points: ", bcolors.ENDC, table_points)
     print(bcolors.OKBLUE, "Finding an approximation to the point: ", bcolors.ENDC, x,'\n')
     polynomialInterpolation(table_points, x)
     print(bcolors.OKBLUE, "\n---------------------------------------------------------------------------\n", bcolors.ENDC)
+'''

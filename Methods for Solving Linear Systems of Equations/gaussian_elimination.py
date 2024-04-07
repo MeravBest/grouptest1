@@ -19,8 +19,6 @@ def gaussianElimination(mat):
     return backward_substitution(mat)
 
 
-
-
 def forward_substitution(mat):
     N = len(mat)
     for k in range(N):
@@ -34,8 +32,6 @@ def forward_substitution(mat):
                 pivot_row = i
 
         # if a principal diagonal element is zero,it denotes that matrix is singular,
-        if abs(mat[k][k]) < 1e-10:  # Adjust tolerance as needed
-            mat[k][k] = 0
         # and will lead to a division-by-zero later.
         if not mat[k][pivot_row]:
             return k  # Matrix is singular
@@ -80,11 +76,19 @@ def backward_substitution(mat):
 
 
 if __name__ == '__main__':
-
-    A_b = [[1, 2, 3, 4, 5],
-        [2, 3, 4, 5, 1],
-        [8, 8, 8, 8, 1],
-        [24, 15, 22, 1, 8]]
+    """"
+           Date: 8/4/24
+           Group: Avishag Tamssut id-326275609
+                   Merav Hashta id-214718405
+                   Sahar Emmuna id-213431133
+           Git: https://github.com/Avishagtams/Numerical-Analysis-Quiz2.git
+           Name: Avishag Tamssut 326275609
+           """
+    A_b = [[2, 3, 4, 5, 6, 70],
+                    [-5, 3, 4, -2, 3, 20],
+                    [4, -5, -2, 2, 6, 26],
+                    [4, 5, -1, -2, -3, -12],
+                    [5, 5, 3, -3, 5, 37]]
 
     result = gaussianElimination(A_b)
     if isinstance(result, str):
