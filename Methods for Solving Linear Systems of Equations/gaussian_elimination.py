@@ -78,11 +78,11 @@ def backward_substitution(mat):
 if __name__ == '__main__':
     """"
            Date: 8/4/24
-           Group: Avishag Tamssut id-326275609
-                   Merav Hashta id-214718405
-                   Sahar Emmuna id-213431133
-           Git: https://github.com/Avishagtams/Numerical-Analysis-Quiz2.git
-           Name: Avishag Tamssut 326275609
+           Group: Merav Hashta id-214718405
+                  Avishag Tamssut id-326275609
+                  Sahar Emmuna id-213431133
+           Git: https://github.com/MeravBest/grouptest1.git
+           Name: Merav Hashta id-214718405
            """
     A_b = [[2, 3, 4, 5, 6, 70],
                     [-5, 3, 4, -2, 3, 20],
