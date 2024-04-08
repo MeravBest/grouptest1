@@ -235,21 +235,13 @@ def print_xo(f, S_list, x0):
                     print("s" + str(i + 1) + "(" + str(x0) + ") = " + str(float(S_list[i].subs(x, x0))))
 
 
-def spline(f, x0, Fx_0,Fx_n):
+def spline(f, x0):
     n = len(f)
 
     matrix = [[0] * (n+1) for _ in range(n)]
 
-    h0 = f[1][0]-f[0][0]
-    h_n_1 = f[n-1][0]-f[n-2][0]
-
-    matrix[0][0] = h0/3
-    matrix[0][1] = h0/6
-    matrix[n-1][n-1] = h_n_1/3
-    matrix[n-1][n-2] = h_n_1/6
-
-    matrix[0][n] = (f[1][1]-f[0][1])/h0 - Fx_0
-    matrix[n - 1][n] = Fx_n - (f[n-1][1]-f[n-2][1])/h_n_1
+    matrix[0][0] = 1
+    matrix[n-1][n-1] = 1
 
 
 
@@ -288,7 +280,7 @@ def spline(f, x0, Fx_0,Fx_n):
 
         print("s" + str(i) + "(x) = " + str(S_list[i]))
 
-    print_xo(f,S_list, x0)
+    print_xo(f,S_list,x0)
 
 
 
@@ -298,9 +290,8 @@ def spline(f, x0, Fx_0,Fx_n):
 
 def calc_im_spline():
     f = [(1, 1), (2, 2), (3, 1), (4, 1.5), (5, 1)]
-    h = [(-1,1),(0,0),(1,1)]
-    x0 = 0.5
-    spline(h, x0, 0, 0)
+    x0 = 4.5
+    spline(f, 4)
 
 
 
