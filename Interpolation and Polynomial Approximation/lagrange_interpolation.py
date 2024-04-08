@@ -36,7 +36,7 @@ def lagrange_interpolation(x_data, y_data, x):
     return result, expression
 
 if __name__ == '__main__':
-
+    f = [(1.2, 1.2), (1.3, 2.3), (1.4, -0.5), (1.5, -0.89), (1.6, -1.37)]
     x_data = [1, 2, 5]
     y_data = [1, 0, 2]
     x_interpolate = 3  # The x-value where you want to interpolate

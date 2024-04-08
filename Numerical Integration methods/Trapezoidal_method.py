@@ -40,11 +40,11 @@ def error_t(f_e, a, b, error,n):
 
 
 if __name__ == '__main__':
-    f = lambda x: math.e ** (x ** 2 )
-    result = trapezoidal_rule(f, 0, 1, 2)
+    f = lambda x: (2*x + math.cos(x**3 + 2*x**2 - 6)) / (x + 2* math.e ** ((-2)*x))
+    result = trapezoidal_rule(f, -0.6, 2.9, 2)
     print("-----------------------------------------------------")
     print(bcolors.OKBLUE,"Approximate integral:", result, bcolors.ENDC)
     x = sp.symbols('x')
     f_e = math.e ** (x ** 2)
-    error_t(f_e, 0, 1, 1, 2)
+    error_t(f_e, -0.6, 2.9, 2.9, 2)
 

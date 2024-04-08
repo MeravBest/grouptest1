@@ -4,7 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import sympy as sp
 from sympy.utilities.lambdify import lambdify
-
+import math
+import sympy as sp
 
 def romberg_integration(func, a, b, n):
     """
@@ -62,16 +63,24 @@ def calc_error(a, b, n):
     print(f"Error in {x0} is: " + str(E_x0))
 
 def f(x):
-    return 1/(2+x ** 4)
+    return (2*x + math.cos(x**3 + 2*x**2 - 6)) / (x + 2* math.e ** ((-2)*x))
 
 
 if __name__ == '__main__':
 
-    a = 0
-    b = 1
-    n = 5
+    a = -0.6
+    b = 2.9
+    n = 10
     integral = romberg_integration(f, a, b, n)
 
     print( f" Division into n={n} sections ")
     print(bcolors.OKBLUE, f"Approximate integral in range [{a},{b}] is {integral}", bcolors.ENDC)
 
+""""
+           Date: 8/4/24
+           Group: Merav Hashta id-214718405
+                  Avishag Tamssut id-326275609
+                  Sahar Emmuna id-213431133
+           Git: https://github.com/MeravBest/grouptest1.git
+           Name: Merav Hashta id-214718405
+"""

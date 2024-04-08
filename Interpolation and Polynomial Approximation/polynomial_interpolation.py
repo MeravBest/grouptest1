@@ -58,8 +58,8 @@ def Prerequisite(table_points):
 if __name__ == '__main__':
 
     print(bcolors.OKBLUE, "----------------- Interpolation & Extrapolation Methods -----------------", bcolors.ENDC)
-    table_points = [(1, 3), (2, 4), (3, -1)]
-    x = 1.5
+    table_points = [(1.2, 1.2), (1.3, 2.3), (1.4, -0.5), (1.5, -0.89), (1.6, -1.37)]
+    x = 1.25
     matrix = Prerequisite(table_points)
     if matrix is not None:
         print(bcolors.OKBLUE, "Table Points: ", bcolors.ENDC, table_points)
